@@ -59,7 +59,7 @@ def fetch_data():
             else:
                 bool = "0"
 
-            return bool, 200
+            return jsonify({"bool":bool}), 200
 
         return jsonify({'message': 'Table not specified or invalid'}), 400
 
