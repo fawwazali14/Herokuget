@@ -1,11 +1,69 @@
-from flask import Flask
+from flask import Flask,jsonify,request
 import os
+import pymysql
 
 app = Flask(__name__)
 
-@app.route('/bye')
-def bye_world():
-    return 'Bye, World!'
+db_config = {
+    'host': 'dbms.cbj29vmpnvrx.us-east-1.rds.amazonaws.com',
+    'user': 'admin',
+    'password': 'password',
+    'database': 'carematch'
+}
+
+
+@app.route('/fetch_data', methods = ['GET'])
+def fetch_data():
+    try:
+        table = request.args.get('table')
+        connection = pymysql.connect(**db_config)
+        cursor = connection.cursor()
+
+        print(table)
+
+        if table == "Job_Listings":
+            job_fetch_query = "SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings WHERE ID != 2;"
+            cursor.execute(job_fetch_query)
+            job_listings = cursor.fetchall()
+
+            cursor.close()
+            connection.close()
+            print(job_listings)
+            # Convert the result to a list of dictionaries for JSON serialization
+            jobs = [
+                {
+                    'job_ID': job[0] if job[0] is not None else None,
+                    'job_title': job[1] if job[1] is not None else None,
+                    'time_posted': job[2] if job[2] is not None else None,
+                    'description': job[3] if job[3] is not None else None,
+                    'pay_per_hr': job[4] if job[4] is not None else None,
+                    'duration': job[5] if job[5] is not None else None,
+                    'cyclic': job[6] if job[6] is not None else None,
+                    'ID': job[7] if job[7] is not None else None,
+                    'is_open': job[8] if job[8] is not None else None
+                } for job in job_listings
+            ]
+            return jsonify({'jobs': jobs}), 200
+
+        elif table == "check":
+            x = request.args.get("ID")
+            check_query = f"SELECT * FROM Users WHERE ID LIKE '{x}';"
+            cursor.execute(check_query)
+            cq = cursor.fetchall()
+            cursor.close()
+            connection.close()
+            bool = None
+            if cq is not None and len(cq) > 0:
+                bool = 1
+            else:
+                bool = 0
+
+            return jsonify({'bool': bool}), 200
+
+        return jsonify({'message': 'Table not specified or invalid'}), 400
+
+    except pymysql.Error as e:
+        return jsonify({'error': f'Error fetching data: {str(e)}'}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5001))  # Use port provided by Heroku or default to 5000
