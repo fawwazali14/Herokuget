@@ -52,13 +52,14 @@ def fetch_data():
             cq = cursor.fetchall()
             cursor.close()
             connection.close()
-            bool = None
+            print("yolo")
+            # bool = None
             if cq is not None and len(cq) > 0:
                 bool = 1
             else:
                 bool = 0
 
-            return jsonify({'bool': bool}), 200
+            return bool, 200
 
         return jsonify({'message': 'Table not specified or invalid'}), 400
 
