@@ -55,9 +55,9 @@ def fetch_data():
             print("yolo")
             # bool = None
             if cq is not None and len(cq) > 0:
-                bool = 1
+                bool = "1"
             else:
-                bool = 0
+                bool = "0"
 
             return bool, 200
 
