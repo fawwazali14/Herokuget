@@ -28,18 +28,18 @@ def fetch_data():
             x = request.args.get('ID')
             print(x)
             notif_query1 = f"SELECT notif_id, notif_type, degree, Notifications.description, notif_title, Notifications.job_ID FROM Notifications JOIN Job_Listings ON Notifications.job_ID = Job_Listings.job_ID WHERE notif_type = Post AND Job_Listings.ID = '{x}'"
-            notif_query2 = f"SELECT * FROM Notifications WHERE job_ID IN (SELECT job_ID FROM Job_Listings WHERE ID = '{x}') AND notif_type = Applied"
-            print("1")
+            # notif_query2 = f"SELECT * FROM Notifications WHERE job_ID IN (SELECT job_ID FROM Job_Listings WHERE ID = '{x}') AND notif_type = Applied"
+            # print("1")
             cursor1 = connection.cursor()
-            cursor2 = connection.cursor()
-            print("2")
+            # cursor2 = connection.cursor()
+            # print("2")
             cursor1.execute(notif_query1)
-            print("3")
-            cursor2.execute(notif_query2)
-            print("4")
+            # print("3")
+            # cursor2.execute(notif_query2)
+            # print("4")
 
             result1 = cursor1.fetchall()
-            result2 = cursor2.fetchall()
+            # result2 = cursor2.fetchall()
             return jsonify({'notification': result1}), 200
             # final = result1 + result2
             # return jsonify({'notification': final}), 200
