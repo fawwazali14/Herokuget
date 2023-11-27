@@ -54,6 +54,14 @@ def fetch_data():
             cursor.close()
             connection.close()
             print(job_listings)
+
+            cursor2 = connection.cursor()
+            username_query = f"Select name from Users where ID ='{job_listings[0]}' "
+            cursor2.execute(username_query)
+            result = cursor2.fetchall()
+            cursor2.close()
+            print(result)
+
             # Convert the result to a list of dictionaries for JSON serialization
             jobs = [
                 {
@@ -65,10 +73,16 @@ def fetch_data():
                     'duration': job[5] if job[5] is not None else None,
                     'cyclic': job[6] if job[6] is not None else None,
                     'ID': job[7] if job[7] is not None else None,
-                    'is_open': job[8] if job[8] is not None else None
+                    'is_open': job[8] if job[8] is not None else None,
+                    'username': result[0]
                 } for job in job_listings
             ]
+
+
             return jsonify({'jobs': jobs}), 200
+        elif table == "filter":
+            print("x")
+
 
         elif table == "check":
             x = request.args.get("ID")
