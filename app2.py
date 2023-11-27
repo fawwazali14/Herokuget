@@ -34,8 +34,10 @@ def fetch_data():
             cursor2 = connection.cursor()
             print("2")
             cursor1.execute(notif_query1)
-            cursor2.execute(notif_query2)
             print("3")
+            cursor2.execute(notif_query2)
+            print("4")
+
             result1 = cursor1.fetchall()
             result2 = cursor2.fetchall()
             return jsonify({'notification': result1}), 200
