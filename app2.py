@@ -44,7 +44,8 @@ def fetch_data():
             return jsonify({'notification': final}), 200
 
         if table == "Job_Listings":
-            job_fetch_query = "SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings WHERE ID != 2;"
+            x = request.args.get('ID')
+            job_fetch_query = f"SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings WHERE ID !='{x}' ;"
             cursor.execute(job_fetch_query)
             job_listings = cursor.fetchall()
 
