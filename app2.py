@@ -37,9 +37,9 @@ def fetch_data():
 
             result1 = cursor1.fetchall()
             result2 = cursor2.fetchall()
-
-            final = result1 + result2
-            return jsonify({'notification': final}), 200
+            return jsonify({'notification': result1}), 200
+            # final = result1 + result2
+            # return jsonify({'notification': final}), 200
 
         if table == "Job_Listings":
             job_fetch_query = "SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings WHERE ID != 2;"
