@@ -45,6 +45,7 @@ def fetch_data():
 
         if table == "Job_Listings":
             x = request.args.get('ID')
+            print(x)
             job_fetch_query = f"SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings WHERE ID !='{x}' ;"
             cursor.execute(job_fetch_query)
             job_listings = cursor.fetchall()
