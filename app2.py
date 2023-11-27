@@ -24,6 +24,23 @@ def fetch_data():
 
         print(table)
 
+        if table == "Notifications":
+            x = request.args.get('ID')
+            notif_query1 = f"SELECT notif_id, notif_type, degree, description, notif_title, job_ID FROM Notifications JOIN Job_Listings ON Notifications.job_ID = Job_Listings.job_ID WHERE notif_type = Post AND Job_Listings.ID = '{x}'"
+            notif_query2 = f"SELECT * FROM Notifications WHERE job_ID IN (SELECT job_ID FROM Job_Listings WHERE ID = '{x}') AND notif_type = Applied"
+
+            cursor1 = connection.cursor()
+            cursor2 = connection.cursor()
+
+            cursor1.execute(notif_query1)
+            cursor2.execute(notif_query2)
+
+            result1 = cursor1.fetchall()
+            result2 = cursor2.fetchall()
+
+            final = result1 + result2
+            return jsonify({'notification': final}), 200
+
         if table == "Job_Listings":
             job_fetch_query = "SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings WHERE ID != 2;"
             cursor.execute(job_fetch_query)
