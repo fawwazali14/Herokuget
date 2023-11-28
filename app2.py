@@ -85,13 +85,21 @@ def fetch_data():
         elif table =="myprofile":
             x = request.args.get("ID")
             print(x)
-            query = f"Select * from Users where ID = '{x}'"
+            query = f"Select  name,email,phone_number from Users where ID = '{x}'"
             cursor.execute(query)
             result = cursor.fetchall()
             print(result)
             cursor.close()
             connection.close()
-            return jsonify({'data': result}), 200
+            resultnew = [
+                {
+                    'username': item[0] if item[0] is not None else None,
+                    'email': item[1] if item[1] is not None else None,
+                    'pno': item[2] if item[2] is not None else None
+
+                } for item in result
+            ]
+            return jsonify({'data': resultnew}), 200
 
 
 
