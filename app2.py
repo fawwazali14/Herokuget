@@ -102,13 +102,7 @@ def fetch_data():
                     'cyclic': job[6] if job[6] is not None else None,
                     'ID': job[7] if job[7] is not None else None,
                     'is_open': job[8] if job[8] is not None else None,
-                    'username': job[9],
-                    'email': job[10],
-                    'travel': job[11],
-                    'dob': job[12],
-                    'job': job[12],
-                    'gender': job[12],
-                    'phone_number': job[12]
+
                 } for job in result
             ]
             return jsonify(jobs)
