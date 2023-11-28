@@ -84,9 +84,11 @@ def fetch_data():
 
         elif table =="myprofile":
             x = request.args.get("ID")
+            print(x)
             query = f"Select * from Users where ID = '{x}'"
             cursor.execute(query)
             result = cursor.fetchall()
+            print(result)
             cursor.close()
             connection.close()
             return jsonify({'data': result}), 200
