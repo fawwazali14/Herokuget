@@ -91,7 +91,27 @@ def fetch_data():
             result = cursor.fetchall()
             print(result)
             cursor.close()
-            return jsonify(result)
+            jobs = [
+                {
+                    'job_ID': job[0] if job[0] is not None else None,
+                    'job_title': job[1] if job[1] is not None else None,
+                    'time_posted': job[2] if job[2] is not None else None,
+                    'description': job[3] if job[3] is not None else None,
+                    'pay_per_hr': job[4] if job[4] is not None else None,
+                    'duration': job[5] if job[5] is not None else None,
+                    'cyclic': job[6] if job[6] is not None else None,
+                    'ID': job[7] if job[7] is not None else None,
+                    'is_open': job[8] if job[8] is not None else None,
+                    'username': job[9],
+                    'email': job[10],
+                    'travel': job[11],
+                    'dob': job[12],
+                    'job': job[12],
+                    'gender': job[12],
+                    'phone_number': job[12]
+                } for job in result
+            ]
+            return jsonify(jobs)
 
         elif table =="myprofile":
             x = request.args.get("ID")
