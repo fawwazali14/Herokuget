@@ -73,7 +73,7 @@ def fetch_data():
                     'dob': job[12],
                     'job': job[13],
                     'gender': job[14],
-                    'phone_number': job[15],
+                    'pno': job[15],
                     'bio': job[16],
                     'Rating': job[17]
                 } for job in job_listings
