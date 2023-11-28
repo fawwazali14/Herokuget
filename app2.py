@@ -47,19 +47,13 @@ def fetch_data():
             x = request.args.get('ID')
             print("solo")
             print(x)
-            job_fetch_query = f"SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings Join Users on Job_Listings.ID = Users.ID WHERE ID !='{x}' ;"
+            job_fetch_query = f"SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings Join Users on Job_Listings.ID = Users.ID WHERE Job_Listings.ID !='{x}' ;"
             cursor.execute(job_fetch_query)
             job_listings = cursor.fetchall()
 
             cursor.close()
             connection.close()
             print(job_listings)
-
-            cursor2 = connection.cursor()
-            username_query = f"Select name from Users where ID ='{job_listings[0]}' "
-            cursor2.execute(username_query)
-            result = cursor2.fetchall()
-            cursor2.close()
 
             # Convert the result to a list of dictionaries for JSON serialization
             jobs = [
