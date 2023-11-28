@@ -47,7 +47,7 @@ def fetch_data():
             x = request.args.get('ID')
             print("solo")
             print(x)
-            job_fetch_query = f"SELECT job_ID, job_title, time_posted, Job_Listings.description, pay_per_hr, duration, cyclic, Job_Listings.ID,is_open,name,email,willing_to_travel,dob,curr_job,gender,phone_number FROM Job_Listings Join Users on Job_Listings.ID = Users.ID WHERE Job_Listings.ID !='{x}' ;"
+            job_fetch_query = f"SELECT job_ID, job_title, time_posted, Job_Listings.description, pay_per_hr, duration, cyclic, Job_Listings.ID,is_open,name,email,willing_to_travel,dob,curr_job,gender,phone_number,bio,Rating FROM Job_Listings Join Users on Job_Listings.ID = Users.ID WHERE Job_Listings.ID !='{x}' ;"
             cursor.execute(job_fetch_query)
             job_listings = cursor.fetchall()
 
@@ -73,7 +73,9 @@ def fetch_data():
                     'dob': job[12],
                     'job': job[12],
                     'gender': job[12],
-                    'phone_number': job[12]
+                    'phone_number': job[12],
+                    'bio' : job[13],
+                    'Rating': job[14]
                 } for job in job_listings
             ]
 
@@ -142,7 +144,7 @@ def fetch_data():
 
             resultnew = [
                 {
-                    'name': item[0] if item[0] is not None else None,
+                    'username': item[0] if item[0] is not None else None,
                     'email': item[1] if item[1] is not None else None,
                     'pno': item[2] if item[2] is not None else None,
                     'user_ID': item[3],
