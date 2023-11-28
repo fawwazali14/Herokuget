@@ -86,7 +86,7 @@ def fetch_data():
             print("yoyo")
             x = request.args.get("ID")
             print(x)
-            query = f"Select * from Job_Listings  where ID = '{x}"
+            query = f"Select * from Job_Listings  where ID = '{x}'"
             cursor.execute(query)
             result = cursor.fetchall()
             print(result)
