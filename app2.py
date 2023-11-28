@@ -128,7 +128,7 @@ def fetch_data():
                     'curr_job':item[5],
                     'bio':item[6],
                     'location':item[7],
-                    'Rating':item[9]
+                    'Rating':item[8]
 
                 } for item in result
             ]
