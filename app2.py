@@ -71,11 +71,11 @@ def fetch_data():
                     'email' : job[10],
                     'travel' : job[11],
                     'dob': job[12],
-                    'job': job[12],
-                    'gender': job[12],
-                    'phone_number': job[12],
-                    'bio': "job[13]",
-                    'Rating': "job[14]"
+                    'job': job[13],
+                    'gender': job[14],
+                    'phone_number': job[15],
+                    'bio': job[16],
+                    'Rating': job[17]
                 } for job in job_listings
             ]
 
