@@ -47,7 +47,7 @@ def fetch_data():
             x = request.args.get('ID')
             print("solo")
             print(x)
-            job_fetch_query = f"SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings WHERE ID !='{x}' ;"
+            job_fetch_query = f"SELECT job_ID, job_title, time_posted, description, pay_per_hr, duration, cyclic, ID,is_open FROM Job_Listings Join Users on Job_Listings.ID = Users.ID WHERE ID !='{x}' ;"
             cursor.execute(job_fetch_query)
             job_listings = cursor.fetchall()
 
@@ -60,7 +60,6 @@ def fetch_data():
             cursor2.execute(username_query)
             result = cursor2.fetchall()
             cursor2.close()
-            print(result)
 
             # Convert the result to a list of dictionaries for JSON serialization
             jobs = [
@@ -74,7 +73,7 @@ def fetch_data():
                     'cyclic': job[6] if job[6] is not None else None,
                     'ID': job[7] if job[7] is not None else None,
                     'is_open': job[8] if job[8] is not None else None,
-                    'username': result[0]
+                    'username':job[9]
                 } for job in job_listings
             ]
 
