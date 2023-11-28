@@ -112,7 +112,7 @@ def fetch_data():
         elif table =="myprofile":
             x = request.args.get("ID")
             print(x)
-            query = f"Select  name,email,phone_number,dob,willing_to_travel,curr_job,bio,location from Users where ID = '{x}'"
+            query = f"Select  name,email,phone_number,dob,willing_to_travel,curr_job,bio,location,Rating from Users where ID = '{x}'"
             cursor.execute(query)
             result = cursor.fetchall()
             print(result)
@@ -127,7 +127,8 @@ def fetch_data():
                     'travel' : item[4],
                     'curr_job':item[5],
                     'bio':item[6],
-                    'location':item[7]
+                    'location':item[7],
+                    'Rating':item[9]
 
                 } for item in result
             ]
