@@ -132,6 +132,26 @@ def fetch_data():
             return jsonify({'data': resultnew}), 200
 
 
+        elif table =="Applies":
+            x = request.args.get("job_ID")
+            query = f"Select name,Users.ID,phone_number,email from Applies Join Users On Applies.ID = Users.ID Where Applies.job_ID = '{x}' "
+            cursor.execute(query)
+            result = cursor.fetchall()
+        elif table =="all":
+            query = "SELECT name,email FROM AllUsers"
+            cursor.execute(query)
+            result = cursor.fetchall()
+            resultnew = [
+                {
+                    'name': item[0] if item[0] is not None else None,
+                    'email': item[1] if item[1] is not None else None,
+
+
+                } for item in result
+            ]
+            return jsonify({'data': resultnew}), 200
+
+
 
         elif table == "check":
             x = request.args.get("ID")
