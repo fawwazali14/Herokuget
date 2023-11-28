@@ -92,21 +92,19 @@ def fetch_data():
             print(result)
             cursor.close()
             connection.close()
-            resultnew = [
-                {
-                    'name': item[0] if item[0] is not None else None,
-                    'email': item[1] if item[1] is not None else None,
-                    'pno': item[2] if item[2] is not None else None,
-                    'dob': item[3],
-                    'travel': item[4],
-                    'curr_job':item[5],
-                    'bio':item[6],
-                    'location':item[7]
-
-                } for item in result
-            ]
+            resultnew = {
+                'name': result[0] if result[0] is not None else None,
+                'email': result[1] if result[1] is not None else None,
+                'pno': result[2] if result[2] is not None else None,
+                'dob': result[3],
+                'travel': result[4],
+                'curr_job': result[5],
+                'bio': result[6],
+                'location': result[7]
+            }
 
             json_result = json.dumps(resultnew)
+
             return json_result, 200
 
 
