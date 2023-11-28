@@ -145,7 +145,7 @@ def fetch_data():
                     'name': item[0] if item[0] is not None else None,
                     'email': item[1] if item[1] is not None else None,
                     'pno': item[2] if item[2] is not None else None,
-                    'user-ID': item[3],
+                    'user_ID': item[3],
 
                 } for item in result
             ]
