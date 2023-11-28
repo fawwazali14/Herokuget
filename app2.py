@@ -2,6 +2,7 @@ from flask import Flask,jsonify,request
 import os
 from flask_cors import CORS
 import pymysql
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -104,7 +105,9 @@ def fetch_data():
 
                 } for item in result
             ]
-            return jsonify({resultnew}), 200
+
+            json_result = json.dumps(resultnew)
+            return json_result, 200
 
 
 
