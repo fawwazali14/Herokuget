@@ -134,9 +134,11 @@ def fetch_data():
 
         elif table =="Applies":
             x = request.args.get("job_ID")
+            print(x)
             query = f"Select name,email,phone_number, Users.ID from Applies Join Users On Applies.ID = Users.ID Where Applies.job_ID = '{x}' "
             cursor.execute(query)
             result = cursor.fetchall()
+            print(result)
 
             resultnew = [
                 {
