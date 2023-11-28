@@ -138,13 +138,13 @@ def fetch_data():
             cursor.execute(query)
             result = cursor.fetchall()
         elif table =="all":
-            query = "SELECT name,email FROM AllUsers"
+            query = "SELECT name,bio FROM AllUsers"
             cursor.execute(query)
             result = cursor.fetchall()
             resultnew = [
                 {
                     'name': item[0] if item[0] is not None else None,
-                    'email': item[1] if item[1] is not None else None,
+                    'bio': item[1] if item[1] is not None else None,
 
 
                 } for item in result
