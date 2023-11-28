@@ -104,7 +104,7 @@ def fetch_data():
 
                 } for item in result
             ]
-            return jsonify({'data': resultnew}), 200
+            return jsonify({resultnew}), 200
 
 
 
