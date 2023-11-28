@@ -75,7 +75,7 @@ def fetch_data():
                     'gender': job[12],
                     'phone_number': job[12],
                     'bio' : job[13],
-                    'Rating': job[14]
+                    'Rating': "job[14]"
                 } for job in job_listings
             ]
 
