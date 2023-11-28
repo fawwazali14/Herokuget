@@ -82,6 +82,17 @@ def fetch_data():
         elif table == "filter":
             print("x")
 
+        elif table == "jobs_myprofile":
+            print("yoyo")
+            x = request.args.get("ID")
+            print(x)
+            query = f"Select * from Job_Listings  where ID = '{x}"
+            cursor.execute(query)
+            result = cursor.fetchall()
+            print(result)
+            cursor.close()
+            return jsonify(result)
+
         elif table =="myprofile":
             x = request.args.get("ID")
             print(x)
