@@ -85,7 +85,7 @@ def fetch_data():
         elif table =="myprofile":
             x = request.args.get("ID")
             print(x)
-            query = f"Select  name,email,phone_number,dob from Users where ID = '{x}'"
+            query = f"Select  name,email,phone_number,dob,willing_to_travel,curr_job,bio from Users where ID = '{x}'"
             cursor.execute(query)
             result = cursor.fetchall()
             print(result)
@@ -96,7 +96,10 @@ def fetch_data():
                     'username': item[0] if item[0] is not None else None,
                     'email': item[1] if item[1] is not None else None,
                     'pno': item[2] if item[2] is not None else None,
-                    'dob': item[3]
+                    'dob': item[3],
+                    'travel' : item[4],
+                    'crr':item[5],
+                    'bio':item[6]
 
                 } for item in result
             ]
