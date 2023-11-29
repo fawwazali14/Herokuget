@@ -27,7 +27,7 @@ def fetch_data():
         if table == "Notifications":
             x = request.args.get('ID')
             print(x)
-            notif_query1 = f"SELECT notif_id, notif_type, degree, Notifications.description, notif_title, Notifications.job_ID FROM Notifications JOIN Job_Listings ON Notifications.job_ID = Job_Listings.job_ID WHERE notif_type = 'Post' AND Job_Listings.ID = '{x}'"
+            notif_query1 = f"SELECT notif_id, notif_type, degree, Notifications.description, notif_title, Notifications.job_ID FROM Notifications JOIN Job_Listings ON Notifications.job_ID = Job_Listings.job_ID WHERE notif_type = 'Post' AND Job_Listings.ID != '{x}'"
             notif_query2 = f"SELECT * FROM Notifications WHERE job_ID IN (SELECT job_ID FROM Job_Listings WHERE ID = '{x}') AND notif_type = 'Applied'"
             # print("1")
             cursor1 = connection.cursor()
