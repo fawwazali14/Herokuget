@@ -39,7 +39,10 @@ def fetch_data():
             print("4")
 
             result1 = cursor1.fetchall()
+            print(result1)
+
             result2 = cursor2.fetchall()
+            print(result2)
             final = result1 + result2
             return jsonify({'notification': final}), 200
 
